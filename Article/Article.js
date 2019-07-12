@@ -78,88 +78,145 @@ const panelData = [
 
 
 
-const accordian = document.querySelector('.articles')
-
-//accordian.appendChild(panelComponent());
-panelData.forEach(data => {
-  console.log('creating panel:', data.title)
-  accordian.appendChild(panelComponent(data.title, data.date, data.content1, data.content2, data.content3, data.content4))
-})
-
-function panelComponent(title, date, content1, content2, content3, content4,) {
-  const articles = document.createElement('div');
-  const article = document.createElement('div');
-  const panelTitle = document.createElement('h2');
-  const panelDate = document.createElement('p');
-  const button = document.createElement('div');
-  const buttonOpen = document.createElement('button');
-  const buttonClose = document.createElement('button');
-  const paragraph1 = document.createElement('p');
-  const paragraph2 = document.createElement('p');
-  const paragraph3 = document.createElement('p');
-  const paragraph4 = document.createElement('p');
-  
-
+const articles = document.querySelector('.articles');
+panelData.forEach(articleObj => {
+  const article = articleComponent(articleObj);
   articles.appendChild(article);
-  articles.appendChild(paragraph1);
-  articles.appendChild(paragraph2);
-  articles.appendChild(paragraph3);
-  articles.appendChild(paragraph4);
-  article.appendChild(panelTitle);
-  article.appendChild(panelDate);
-  article.appendChild(button);
-  button.appendChild(buttonOpen);
-  button.appendChild(buttonClose);
+})
  
 
-  articles.classList.add('.articles');
-  article.classList.add('.article');
-  button.classList.add('.expandButton');
-  buttonOpen.classList.add('btn-open');
-  buttonClose.classList.add('btn-close', 'hide-btn');
-  paragraph1.classList.add('content1');
-  paragraph2.classList.add('content2');
-  paragraph3.classList.add('content3');
-  paragraph4.classList.add('content4');
+function articleComponent(articleObj) {
+    const article = document.createElement('div');
+    const title = document.createElement('h2');
+    const date = document.createElement('p');
+    const para1 = document.createElement('p');
+    const para2 = document.createElement('p');
+    const para3 = document.createElement('p');
+    const para4 = document.createElement('p');
+    const expandButton = document.createElement('button')
 
+    article.classList.add('article');
+    date.classList.add('date');
+    expandButton.classList.add('expandButton')
 
+    title.textContent = articleObj.title;
+    date.textContent = articleObj.date;
+    para1.textContent = articleObj.content1;
+    para2.textContent = articleObj.content2;
+    para3.textContent = articleObj.content3;
+    para4.textContent = articleObj.content3;
+    expandButton.textContent = 'expand';
 
-  buttonOpen.textContent = 'Expand'
-  buttonClose.textContent = 'Close'
-  panelTitle.textContent = title
-  panelDate.textContent = date
-  paragraph1.textContent = content1
-  paragraph2.textContent = content2
-  paragraph3.textContent = content3
-  paragraph4.textContent = content4
+    article.appendChild(title);
+    article.appendChild(date);
+    article.appendChild(para1, para2, para3, para4);
+    article.appendChild(expandButton);
 
-  button.addEventListener('click', event => {
-    console.log('button clicked', event.target)
-    buttonOpen.classList.toggle('hide-btn')
-    buttonClose.classList.toggle('hide-btn')
-    paragraph1.classList.toggle('toggle-on')
-    paragraph2.classList.toggle('toggle-on')
-    paragraph3.classList.toggle('toggle-on')
-    paragraph4.classList.toggle('toggle-on')
-  })
+    expandButton.addEventListener('click', () => {
+      article.classList.toggle('article-open');
+    })
 
-  return articles;
-
+    return article;
 }
 
-function createPanel2(title, date, content1, content2, content3, content4) {
-  const panel = document.createElement('div')
-  panel.innerHTML = `<div class="article">
-                        <h2>${title}</h3> 
-                        <p class="date">${date}</p>
-                        <div class="expandButton"> 
-                          <button class="btn-open>Expand</button>
-                          <button class="btn-close hide-btn">Close</button>
-                        </span>
-                        <p>${content1}</p>
-                        <p>${content2}</p>
-                        <p>${content3}</p>
-                        <p>${content4}</p>
-                        </div>`
-  return panel
-}
+
+
+
+
+
+
+
+
+
+
+
+//accordian.appendChild(panelComponent());
+// panelData.forEach(data => {
+//   console.log('creating panel:', data.title)
+//   accordian.appendChild(panelComponent(data.title, data.date, data.content1, data.content2, data.content3, data.content4))
+// })
+
+// function panelComponent(articleContent) {
+//   const articles = document.createElement('div');
+//   const article = document.createElement('div');
+//   const panelTitle = document.createElement('h2');
+//   const panelDate = document.createElement('p');
+//   const button = document.createElement('div');
+//   const buttonOpen = document.createElement('button');
+//   const buttonClose = document.createElement('button');
+//   const panelContent = document.createElement('div')
+//   const paragraph1 = document.createElement('p');
+//   const paragraph2 = document.createElement('p');
+//   const paragraph3 = document.createElement('p');
+//   const paragraph4 = document.createElement('p');
+  
+
+//   articles.appendChild(article);
+//   panelContent.appendChild(paragraph1);
+//   panelContent.appendChild(paragraph2);
+//   panelContent.appendChild(paragraph3);
+//   panelContent.appendChild(paragraph4);
+//   article.appendChild(panelContent);
+//   article.appendChild(panelTitle);
+//   article.appendChild(panelDate);
+//   article.appendChild(button);
+//   button.appendChild(buttonOpen);
+//   button.appendChild(buttonClose);
+ 
+
+//   // articles.classList.add('.articles');
+//   articles.classList.add('article');
+//   panelData.classList.add('date')
+//   button.classList.add('expandButton');
+//   buttonOpen.classList.add('btn-open');
+//   buttonClose.classList.add('btn-close', 'hide-btn');
+//   panelContent.classList.add('panel-content');
+//   // paragraph1.classList.add('content1');
+//   // paragraph2.classList.add('content2');
+//   // paragraph3.classList.add('content3');
+//   // paragraph4.classList.add('content4');
+
+
+
+//   buttonOpen.textContent = 'Expand'
+//   buttonClose.textContent = 'Close'
+//   panelTitle.textContent = articleContent.title
+//   panelDate.textContent = articleContent.date
+//   panelContent.textContent = articleContent.content1
+//   panelContent.textContent = articleContent.content2
+//   panelContent.textContent = articleContent.content3
+//   panelContent.textContent = articleContent.content4
+//   // paragraph1.textContent = articlecontent.content1
+//   // paragraph2.textContent = articlecontent.content2
+//   // paragraph3.textContent = articlecontent.content3
+//   // paragraph4.textContent = articlecontent.content4
+
+//   button.addEventListener('click', event => {
+//     console.log('button clicked', event.target)
+//     buttonOpen.classList.toggle('hide-btn')
+//     buttonClose.classList.toggle('hide-btn')
+//     panelContent.classList.toggle('toggle-on')
+//   })
+
+//   return articles;
+
+// }
+
+// function createPanel2(title, date, content1, content2, content3, content4) {
+//   const panel = document.createElement('div')
+//   panel.innerHTML = `<div class="article">
+//                         <h2>${title}</h3> 
+//                         <p class="date">${date}</p>
+//                         <div class="expandButton"> 
+//                           <button class="btn-open>Expand</button>
+//                           <button class="btn-close hide-btn">Close</button>
+//                         </div>
+//                         <div class='panel-Content   
+  //                         <p>${content1}</p>
+  //                         <p>${content2}</p>
+  //                         <p>${content3}</p>
+  //                         <p>${content4}</p>
+//                         </div>
+//                       </div>`
+//   return panel
+// }
